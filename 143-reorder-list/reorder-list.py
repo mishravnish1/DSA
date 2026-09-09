@@ -8,18 +8,18 @@ class Solution:
         if not head or not head.next:
             return
 
-        # Step 1: Find the middle
-        slow = head
-        fast = head
+        # Find middle
+        slow = fast = head
 
         while fast.next and fast.next.next:
             slow = slow.next
             fast = fast.next.next
 
-        # Step 2: Reverse the second half
+        # Separate second half
         second = slow.next
         slow.next = None
 
+        # Reverse second half
         prev = None
 
         while second:
@@ -28,19 +28,19 @@ class Solution:
             prev = second
             second = nxt
 
-        # Step 3: Merge the two halves
+        # Merge
         first = head
         second = prev
 
         while second:
-            first_next = first.next
-            second_next = second.next
+            a = first.next
+            b = second.next
 
             first.next = second
-            second.next = first_next
+            second.next = a
 
-            first = first_next
-            second = second_next
+            first = a
+            second = b
         """
         :type head: Optional[ListNode]
         :rtype: None Do not return anything, modify head in-place instead.
