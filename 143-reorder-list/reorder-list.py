@@ -7,40 +7,33 @@ class Solution:
     def reorderList(self, head):
         if not head or not head.next:
             return
-
-        # Find middle
-        slow = fast = head
-
+        slow=fast=head
         while fast.next and fast.next.next:
-            slow = slow.next
-            fast = fast.next.next
+            slow=slow.next
+            fast=fast.next.next
 
-        # Separate second half
-        second = slow.next
-        slow.next = None
+        second=slow.next
+        prev=slow.next=None
 
         # Reverse second half
-        prev = None
-
         while second:
-            nxt = second.next
-            second.next = prev
-            prev = second
-            second = nxt
+            tmp=second.next
+            second.next=prev
+            prev=second
+            second=tmp
 
         # Merge
-        first = head
-        second = prev
+        first,second =head,prev
 
         while second:
-            a = first.next
-            b = second.next
+            tmp1 = first.next
+            tmp2 = second.next
 
             first.next = second
-            second.next = a
+            second.next = tmp1
 
-            first = a
-            second = b
+            first = tmp1
+            second = tmp2
         """
         :type head: Optional[ListNode]
         :rtype: None Do not return anything, modify head in-place instead.
