@@ -1,23 +1,20 @@
 class Solution(object):
     def findMaxAverage(self, nums, k):
+        left=0
+        window_sum=0
+        max_sum=float('-inf')
 
-        window_sum = 0
+        for right in range(len(nums)):
+            window_sum+=nums[right]
+            if right-left+1 ==k:
+                
+                max_sum=max(max_sum,window_sum)
+                window_sum-=nums[left]
+                left+=1
+        return float(max_sum)/k       
 
-        # First window
-        for i in range(k):
-            window_sum += nums[i]
 
-        maximum = window_sum
-
-        # Slide window
-        for right in range(k, len(nums)):
-
-            window_sum += nums[right]
-            window_sum -= nums[right - k]
-
-            maximum = max(maximum, window_sum)
-
-        return maximum / float(k)
+        
         """
         :type nums: List[int]
         :type k: int
