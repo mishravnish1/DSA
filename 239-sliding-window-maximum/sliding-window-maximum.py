@@ -5,21 +5,22 @@ class Solution:
 
         dq = deque()
         result = []
+        left = 0
 
         for right in range(len(nums)):
 
-            # Window ke bahar wale index ko remove
-            if dq and dq[0] < right - k + 1:
-                dq.popleft()
-
-            # Chhoti values ko remove
             while dq and nums[dq[-1]] < nums[right]:
                 dq.pop()
 
             dq.append(right)
 
-            # Window complete hai
-            if right >= k - 1:
+            if right - left + 1 > k:
+                left += 1
+
+            if dq[0] < left:
+                dq.popleft()
+
+            if right - left + 1 == k:
                 result.append(nums[dq[0]])
 
         return result
