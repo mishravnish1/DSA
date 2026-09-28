@@ -1,11 +1,12 @@
 class Solution(object):
     def reverseString(self, s):
-        result = []
-
-        for i in range(len(s) - 1, -1, -1):
-            result.append(s[i])
-
-        s[:] = result
+        l=0
+        r=len(s)-1
+        while l<r:
+            s[l],s[r]=s[r],s[l]
+            l+=1
+            r-=1    
+        
 
         """
         :type s: List[str]
