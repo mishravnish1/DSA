@@ -3,13 +3,7 @@ class Solution(object):
         if len(s) != len(t):
             return False
 
-        for ch in s:
-            if ch not in t:
-                return False
-
-            t = t.replace(ch, "", 1)
-
-        return True
+        return sorted(s) == sorted(t)
         """
         :type s: str
         :type t: str
