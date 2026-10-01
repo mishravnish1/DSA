@@ -1,12 +1,15 @@
 class Solution(object):
     def reverseString(self, s):
-        result = []
+        left = 0
+        right = len(s) - 1
 
-        for i in range(len(s) - 1, -1, -1):
-            result.append(s[i])
+        while left < right:
+            s[left], s[right] = s[right], s[left]
 
-        for i in range(len(s)):
-            s[i] = result[i]
+            left += 1
+            right -= 1
+
+
         
 
         """
