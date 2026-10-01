@@ -1,11 +1,19 @@
 class Solution(object):
     def reverseString(self, s):
-        l=0
-        r=len(s)-1
-        while l<r:
-            s[l],s[r]=s[r],s[l]
-            l+=1
-            r-=1    
+        result = []
+
+        for i in range(len(s) - 1, -1, -1):
+            result.append(s[i])
+
+        for i in range(len(s)):
+            s[i] = result[i]
+        
+
+        """
+        :type s: List[str]
+        :rtype: None Do not return anything, modify s in-place instead.
+        """
+        
         
 
         """
