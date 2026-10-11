@@ -1,15 +1,12 @@
 class Solution(object):
     def twoSum(self, nums, target):
-        seen = {}
-
         for i in range(len(nums)):
-            needed = target - nums[i]
+            for j in range(i + 1, len(nums)):
+                if nums[i] + nums[j] == target:
+                    return [i, j]
 
-            if needed in seen:
-                return [seen[needed], i]
-
-            seen[nums[i]] = i
-
+        
+    
         
         
 
