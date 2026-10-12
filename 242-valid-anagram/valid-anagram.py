@@ -1,9 +1,21 @@
+
 class Solution(object):
     def isAnagram(self, s, t):
+        freq = {}
+
         if len(s) != len(t):
             return False
 
-        return sorted(s) == sorted(t)
+        for ch in s:
+            freq[ch] = freq.get(ch, 0) + 1
+
+        for ch in t:
+            if ch not in freq or freq[ch] == 0:
+                return False
+            freq[ch] -= 1
+
+        return True
+
         """
         :type s: str
         :type t: str
