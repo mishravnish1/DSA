@@ -33,7 +33,9 @@ class Solution(object):
                 else:
                     right -= 1
 
-        return result                           
+        return result             
+
+                                              
 
         
                   
