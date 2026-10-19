@@ -1,11 +1,13 @@
 class Solution(object):
     def containsNearbyDuplicate(self, nums, k):
         
-        last_seen = {}
-        for i, num in enumerate(nums): #Enumerate humein har element ka 'index' aur uski 'value' dono ek sath deta hai
-            if num in last_seen and i - last_seen[num] <= k:
+        window = set()
+        for i, num in enumerate(nums):
+            if num in window:
                 return True
-            last_seen[num] = i # Agar number naya hai ya gap k se bada tha, toh uski nayi position store/update karein
+            window.add(num)
+            if len(window) > k:
+                window.remove(nums[i - k])
         return False            
                 
 
