@@ -1,25 +1,22 @@
 class Solution(object):
     def topKFrequent(self, nums, k):
         # 1. Correctly initialize count as a dictionary
-        count = {} 
-        freq = [[] for i in range(len(nums) + 1)]
-        
-        # 2. Populate the frequency dictionary
-        for n in nums:
-            count[n] = 1 + count.get(n, 0)
-            
-        # 3. Use .items() instead of .item()
-        for n, c in count.items(): 
-            freq[c].append(n)
-            
+        count = {}
+        for x in nums:
+            count[x] = count.get(x, 0) + 1
+
+    # Step 2: frequency ko index bana ke buckets
+        buckets = [[] for _ in range(len(nums) + 1)]
+        for x, f in count.items():
+            buckets[f].append(x)
+
+    # Step 3: high frequency se low ki taraf padho
         res = []
-        # 4. Iterate backward from highest frequency bucket
-        for i in range(len(freq) - 1, 0, -1):
-            for n in freq[i]:
-                res.append(n)
-                # 5. Fix logic bug by checking >= to avoid overshoot
-                if len(res) >= k: 
-                    return res   
+        for f in range(len(buckets) - 1, 0, -1):
+            for x in buckets[f]:
+                res.append(x)
+                if len(res) == k:
+                    return res    
         """
         :type nums: List[int]
         :type k: int
