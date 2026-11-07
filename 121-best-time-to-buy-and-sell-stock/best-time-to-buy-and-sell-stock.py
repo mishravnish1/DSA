@@ -14,4 +14,9 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
+           
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
         
