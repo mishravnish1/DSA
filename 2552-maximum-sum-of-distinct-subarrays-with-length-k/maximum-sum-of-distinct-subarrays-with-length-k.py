@@ -1,32 +1,42 @@
 class Solution(object):
     def maximumSubarraySum(self, nums, k):
         n = len(nums)
-        left = 0
-        curr_sum = 0
-        seen = set()
+
+        if k <= 0 or n < k:
+            return 0
+
+        window_sum = 0
+        seen = {}
         max_sum = 0
 
-        for right in range(n):
-            # If duplicate found, shrink window
-            while nums[right] in seen:
-                seen.remove(nums[left])
-                curr_sum -= nums[left]
-                left += 1
-            
-            # Add current element
-            seen.add(nums[right])
-            curr_sum += nums[right]
+        # Build first window
+        for i in range(k):
+            window_sum += nums[i]
+            seen[nums[i]] = seen.get(nums[i], 0) + 1
 
-            # If window size == k
-            if right - left + 1 == k:
-                max_sum = max(max_sum, curr_sum)
-                
-                # Slide window
-                seen.remove(nums[left])
-                curr_sum -= nums[left]
-                left += 1
+        if len(seen) == k:
+            max_sum = window_sum
+
+        # Slide the window
+        for i in range(k, n):
+            window_sum += nums[i]
+            seen[nums[i]] = seen.get(nums[i], 0) + 1
+
+            window_sum -= nums[i-k]
+            seen[nums[i-k]] -= 1
+
+            if seen[nums[i-k]] == 0:
+                del seen[nums[i-k]]
+
+            if len(seen) == k:
+                max_sum = max(max_sum, window_sum)
 
         return max_sum
+
+
+            
+
+        
         """
         :type nums: List[int]
         :type k: int
