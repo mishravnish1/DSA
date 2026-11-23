@@ -3,12 +3,7 @@ class Solution:
         groups = {}
 
         for word in strs:
-            count = [0] * 26
-
-            for ch in word:
-                count[ord(ch) - ord('a')] += 1
-
-            key = tuple(count)
+            key = "".join(sorted(word))
 
             if key not in groups:
                 groups[key] = []
